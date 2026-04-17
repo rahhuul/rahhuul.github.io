@@ -1,0 +1,552 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   CSS Custom Properties  Journal Design System
+   ───────────────────────────────────────────── */
+
+:root {
+  /* Light mode  paper/ink */
+  --color-bg: #FAF8F5;
+  --color-bg-alt: #F0EBE3;
+  --color-bg-dark: #141414;
+
+  --color-ink: #1a1a1a;
+  --color-ink-light: #2d2d2d;
+  --color-ink-faded: #4a4a4a;
+  --color-ink-muted: #6b6b6b;
+
+  --color-accent: #8B6914;
+  --color-accent-light: #b8963e;
+  --color-accent-muted: #c4a96b;
+
+  --color-annotation-red: #c23616;
+  --color-annotation-blue: #2c3e6b;
+
+  --color-code: #2d5016;
+
+  /* Surface */
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F7F4F0;
+  --color-border: rgba(26, 26, 26, 0.10);
+  --color-border-strong: rgba(26, 26, 26, 0.20);
+
+  /* Foreground text */
+  --color-fg: #1a1a1a;
+  --color-fg-muted: #4a4a4a;
+  --color-fg-subtle: #6b6b6b;
+
+  /* Chapters */
+  --color-chapter-hook-bg: #141414;
+  --color-chapter-hook-fg: #e8e0d4;
+  --color-chapter-origin-bg: #FAF8F5;
+  --color-chapter-craft-bg: #F0EBE3;
+  --color-chapter-work-bg: #FAF8F5;
+  --color-chapter-proof-bg: #F0EBE3;
+  --color-chapter-contact-bg: #1a1a1a;
+  --color-chapter-contact-fg: #e8e0d4;
+
+  /* Layout */
+  --max-content: 1280px;
+  --max-prose: 72ch;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+  --duration-xslow: 1100ms;
+
+  /* Grain overlay opacity */
+  --grain-opacity: 0.04;
+}
+
+/* ── Dark mode via class (for future manual toggle) ── */
+.dark {
+  --color-bg: #141414;
+  --color-bg-alt: #1e1e1e;
+
+  --color-ink: #e8e0d4;
+  --color-ink-light: #d4ccc0;
+  --color-ink-faded: #b0a898;
+  --color-ink-muted: #8a8278;
+
+  --color-accent: #b8963e;
+  --color-accent-light: #c4a96b;
+  --color-accent-muted: #8b6914;
+
+  --color-annotation-red: #e05a3a;
+  --color-annotation-blue: #6080c0;
+  --color-code: #5a9a3a;
+
+  --color-surface: #1e1e1e;
+  --color-surface-alt: #252525;
+  --color-border: rgba(232, 224, 212, 0.10);
+  --color-border-strong: rgba(232, 224, 212, 0.20);
+
+  --color-fg: #e8e0d4;
+  --color-fg-muted: #b0a898;
+  --color-fg-subtle: #8a8278;
+
+  --grain-opacity: 0.02;
+
+  /* Chapter backgrounds */
+  --color-chapter-origin-bg: #141414;
+  --color-chapter-craft-bg: #1a1a18;
+  --color-chapter-work-bg: #141414;
+  --color-chapter-proof-bg: #1a1a18;
+}
+
+/* ── Dark mode via system preference (primary activation) ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #141414;
+    --color-bg-alt: #1e1e1e;
+
+    --color-ink: #e8e0d4;
+    --color-ink-light: #d4ccc0;
+    --color-ink-faded: #b0a898;
+    --color-ink-muted: #8a8278;
+
+    --color-accent: #b8963e;
+    --color-accent-light: #c4a96b;
+    --color-accent-muted: #8b6914;
+
+    --color-annotation-red: #e05a3a;
+    --color-annotation-blue: #6080c0;
+    --color-code: #5a9a3a;
+
+    --color-surface: #1e1e1e;
+    --color-surface-alt: #252525;
+    --color-border: rgba(232, 224, 212, 0.10);
+    --color-border-strong: rgba(232, 224, 212, 0.20);
+
+    --color-fg: #e8e0d4;
+    --color-fg-muted: #b0a898;
+    --color-fg-subtle: #8a8278;
+
+    --grain-opacity: 0.02;
+
+    /* Chapter backgrounds */
+    --color-chapter-origin-bg: #141414;
+    --color-chapter-craft-bg: #1a1a18;
+    --color-chapter-work-bg: #141414;
+    --color-chapter-proof-bg: #1a1a18;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Base Reset & Typography
+   ───────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-source-serif, Georgia, serif);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Paper grain overlay  sits on top of everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("/images/textures/noise.png");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+}
+
+.dark body::before {
+  mix-blend-mode: screen;
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    mix-blend-mode: screen;
+  }
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent);
+  color: #FAF8F5;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────────────────
+   Typography Scale
+   ───────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair, Georgia, serif);
+  color: var(--color-fg);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: var(--color-fg-muted);
+  font-family: var(--font-source-serif, Georgia, serif);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-jetbrains, monospace);
+  font-size: 0.9em;
+}
+
+/* ─────────────────────────────────────────────
+   Lenis smooth scroll integration
+   ───────────────────────────────────────────── */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   Splitting.js character/word spans
+   ───────────────────────────────────────────── */
+
+.splitting .char {
+  display: inline-block;
+  position: relative;
+}
+
+.splitting .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────
+   Journal-specific utility classes
+   ───────────────────────────────────────────── */
+
+/* Torn edge dividers  clip-path on section boundaries */
+.torn-edge-top {
+  clip-path: polygon(
+    0% 8px, 2% 0%, 5% 6px, 8% 1px, 11% 7px, 15% 2px,
+    18% 8px, 22% 1px, 26% 6px, 30% 0%, 34% 7px, 38% 2px,
+    42% 8px, 46% 1px, 50% 6px, 54% 2px, 58% 8px, 62% 1px,
+    66% 6px, 70% 2px, 74% 7px, 78% 1px, 82% 6px, 86% 2px,
+    90% 8px, 94% 1px, 97% 6px, 100% 2px,
+    100% 100%, 0% 100%
+  );
+}
+
+.torn-edge-bottom {
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    100% calc(100% - 2px), 97% 100%, 94% calc(100% - 6px),
+    90% calc(100% - 1px), 86% calc(100% - 7px), 82% calc(100% - 2px),
+    78% calc(100% - 8px), 74% calc(100% - 1px), 70% calc(100% - 6px),
+    66% calc(100% - 2px), 62% calc(100% - 7px), 58% calc(100% - 1px),
+    54% calc(100% - 6px), 50% calc(100% - 2px), 46% calc(100% - 8px),
+    42% calc(100% - 1px), 38% calc(100% - 6px), 34% calc(100% - 2px),
+    30% calc(100% - 8px), 26% calc(100% - 1px), 22% calc(100% - 6px),
+    18% calc(100% - 2px), 15% calc(100% - 7px), 11% calc(100% - 1px),
+    8% calc(100% - 6px), 5% calc(100% - 2px), 2% calc(100% - 8px), 0% 100%
+  );
+}
+
+/* Ink underline accent */
+.ink-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.ink-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease-out);
+}
+
+.ink-underline:hover::after,
+.ink-underline.active::after {
+  transform: scaleX(1);
+}
+
+/* Annotation text style */
+.annotation {
+  font-family: var(--font-caveat, cursive);
+  font-size: 0.875rem;
+  color: var(--color-annotation-red);
+  line-height: 1.4;
+}
+
+.annotation-blue {
+  color: var(--color-annotation-blue);
+}
+
+/* Coffee stain decorative element */
+.coffee-stain {
+  position: relative;
+}
+
+.coffee-stain::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 40%,
+    transparent 55%,
+    rgba(139, 105, 20, 0.06) 55%,
+    rgba(139, 105, 20, 0.08) 65%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   Scroll Progress Bar (top of page)
+   ───────────────────────────────────────────── */
+
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 1000;
+  transition: none;
+}
+
+/* ─────────────────────────────────────────────
+   Bounce animation  scroll indicator in Chapter 1
+   ───────────────────────────────────────────── */
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* ─────────────────────────────────────────────
+   Screen-reader only utility
+   ───────────────────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─────────────────────────────────────────────
+   Reduced motion  disable all animations
+   Keep: pulse-dot / pulse-ring (functional status indicator)
+   Keep: terminal-blink (functional cursor)
+   ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Re-enable functional animations */
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.15); opacity: 0.9; }
+  }
+  @keyframes pulse-ring {
+    0%   { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.8); opacity: 0; }
+  }
+
+  /* FadeInOnScroll  make content visible immediately */
+  .fade-in-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Splitting.js chars/words  show immediately */
+  .splitting .char,
+  .splitting .word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Hide scroll-to-begin bounce indicator */
+  .scroll-indicator {
+    display: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Horizontal scroll section (Chapter 2)
+   ───────────────────────────────────────────── */
+
+.horizontal-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────────────
+   Polaroid card styles
+   ───────────────────────────────────────────── */
+
+.polaroid {
+  background: #ffffff;
+  padding: 12px 12px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.polaroid::before {
+  /* Tape effect */
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 60px;
+  height: 22px;
+  background: rgba(232, 200, 150, 0.5);
+  backdrop-filter: none;
+  border: 1px solid rgba(200, 170, 100, 0.3);
+}
+
+/* ─────────────────────────────────────────────
+   Terminal component styles
+   ───────────────────────────────────────────── */
+
+.terminal {
+  background: #0d1117;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: var(--font-jetbrains, monospace);
+}
+
+.terminal-bar {
+  background: #21262d;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-body {
+  padding: 20px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #c9d1d9;
+  min-height: 200px;
+}
+
+.terminal-prompt::before {
+  content: "$ ";
+  color: #58a6ff;
+}
+
+.terminal-output {
+  color: #3fb950;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background: #c9d1d9;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────
+   Chapter section base styles
+   ───────────────────────────────────────────── */
+
+.chapter {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.chapter-inner {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ─────────────────────────────────────────────
+   Page-level transition wrapper
+   ───────────────────────────────────────────── */
+
+.page-wrapper {
+  position: relative;
+  will-change: opacity;
+}
