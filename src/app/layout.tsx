@@ -9,6 +9,7 @@ import {
 import "./globals.css";
 import { SITE } from "@/lib/constants";
 import { Providers } from "@/components/layout/Providers";
+import { VisitorTracker } from "@/components/layout/VisitorTracker";
 
 // ─────────────────────────────────────────────
 // Google Fonts - self-hosted via next/font
@@ -318,6 +319,7 @@ export default function RootLayout({
         />
       </head>
       <body className="page-wrapper">
+        <VisitorTracker />
         <Providers>{children}</Providers>
       </body>
     </html>
