@@ -8,6 +8,7 @@ import { InteractiveTerminal } from "@/components/ui/InteractiveTerminal";
 import { BentoGrid } from "@/components/ui/BentoGrid";
 import { ExpertiseCard } from "@/components/ui/ExpertiseCard";
 import { StackWall } from "@/components/ui/StackWall";
+
 import { SKILL_DOMAINS } from "@/data/skills";
 
 // ── Expertise cards data ────────────────────────────────────────────
@@ -223,7 +224,6 @@ export function Chapter03Craft() {
   const [mountKey, setMountKey] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const blockRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   // ── Fallback: activate first visual as soon as the section is 15% visible.
   // This prevents the left panel from staying blank when the user scrolls
   // quickly past the center-band trigger zone.

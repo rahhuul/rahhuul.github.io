@@ -103,16 +103,14 @@ export function FadeInOnScroll({
     };
   }, [delay, duration, direction, start, distance, immediate]);
 
-  const TagEl = Tag as React.ElementType;
-
-  return (
-    <TagEl
-      ref={ref}
-      className={`fade-in-scroll ${className}`}
-      style={style}
-      {...rest}
-    >
-      {children}
-    </TagEl>
+  return React.createElement(
+    Tag as string,
+    {
+      ref,
+      className: `fade-in-scroll ${className}`,
+      style,
+      ...rest,
+    },
+    children
   );
 }

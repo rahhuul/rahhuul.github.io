@@ -7,6 +7,7 @@ import { FadeInOnScroll } from "@/components/effects/FadeInOnScroll";
 import { TextReveal } from "@/components/effects/TextReveal";
 import { PolaroidCard } from "@/components/ui/PolaroidCard";
 import { MarginNote } from "@/components/ui/MarginNote";
+
 import { PROJECTS } from "@/data/projects";
 
 // One rotation per project  alternates the slight tilt on each polaroid

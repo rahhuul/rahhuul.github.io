@@ -6,6 +6,7 @@ import { FadeInOnScroll } from "@/components/effects/FadeInOnScroll";
 import { TextReveal } from "@/components/effects/TextReveal";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
+
 // ── Tech evolution data ─────────────────────────────────────────────
 const TECH_EVOLUTION = [
   {
@@ -170,7 +171,7 @@ function TechEvolution() {
 
 export function Chapter05Proof() {
   const gridRef = useRef<HTMLDivElement>(null);
-
+  const sectionRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (typeof window === "undefined") return;
     const el = gridRef.current;
@@ -209,6 +210,7 @@ export function Chapter05Proof() {
 
   return (
     <section
+      ref={sectionRef}
       id="chapter-proof"
       aria-labelledby="chapter-proof-heading"
       style={{ background: "var(--color-bg-alt)", position: "relative", overflowX: "hidden" }}

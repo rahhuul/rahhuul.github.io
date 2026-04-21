@@ -112,15 +112,13 @@ export function TextReveal({
     };
   }, [delay, staggerSpeed, immediate, start]);
 
-  const TagEl = Tag as React.ElementType;
-
-  return (
-    <TagEl
-      ref={containerRef}
-      className={`text-reveal ${className}`}
-      {...rest}
-    >
-      {children}
-    </TagEl>
+  return React.createElement(
+    Tag as string,
+    {
+      ref: containerRef,
+      className: `text-reveal ${className}`,
+      ...rest,
+    },
+    children
   );
 }

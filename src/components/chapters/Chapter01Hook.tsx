@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 
+
 export function Chapter01Hook() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -129,7 +130,7 @@ export function Chapter01Hook() {
       }}
     >
 
-      {/* FIX 2: Watermark  absolute, gets its own slower parallax */}
+      {/* Watermark  absolute, gets its own slower parallax */}
       <div
         ref={watermarkRef}
         aria-hidden="true"

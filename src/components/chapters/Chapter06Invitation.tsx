@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
+
 const BG = "#1c1915";
 const CREAM = "#e8e0d4";
 
