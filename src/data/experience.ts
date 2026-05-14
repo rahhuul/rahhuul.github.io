@@ -90,7 +90,7 @@ export const JOURNAL_ENTRIES: JournalEntry[] = [
   {
     year: "2014",
     entry:
-      "iDevTechnolabs. CodeIgniter, jQuery, and dreams of building something real.",
+      "CodeIgniter, jQuery, and dreams of building something real.",
   },
   {
     year: "2016",
