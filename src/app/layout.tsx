@@ -10,8 +10,6 @@ import "./globals.css";
 import { SITE } from "@/lib/constants";
 import { Providers } from "@/components/layout/Providers";
 import { VisitorTracker } from "@/components/layout/VisitorTracker";
-import { ChatWidget } from "@/components/ui/ChatWidget";
-
 // ─────────────────────────────────────────────
 // Google Fonts - self-hosted via next/font
 // ─────────────────────────────────────────────
@@ -322,7 +320,6 @@ export default function RootLayout({
       <body className="page-wrapper">
         <VisitorTracker />
         <Providers>{children}</Providers>
-        <ChatWidget />
       </body>
     </html>
   );

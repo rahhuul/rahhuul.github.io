@@ -123,6 +123,61 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "career",
     featured: false,
   },
+  {
+    slug: "sms-drip-campaigns-redis-queues-nodejs",
+    title: "Building SMS Drip Campaigns with Redis Queues and Node.js",
+    description:
+      "The architecture behind a multi-tenant SMS drip campaign system handling millions of messages a month. BullMQ delayed jobs, idempotency keys, per-tenant rate limiting, and zero message loss.",
+    date: "2026-04-10",
+    readTime: "11 min read",
+    tags: ["Node.js", "Redis", "BullMQ", "SMS", "Backend"],
+    pillar: "technical",
+    featured: false,
+  },
+  {
+    slug: "laravel-to-nodejs-php-developer-migration",
+    title: "Laravel to Node.js: What 6 Years of PHP Taught Me About Switching",
+    description:
+      "An honest comparison after switching from Laravel to Node.js full-time. What Eloquent gets right that no Node ORM has matched, what Node.js does better, and a practical migration checklist.",
+    date: "2026-04-25",
+    readTime: "10 min read",
+    tags: ["Node.js", "Laravel", "PHP", "Backend", "Career"],
+    pillar: "technical",
+    featured: false,
+  },
+  {
+    slug: "integrating-claude-api-codepulse-ai",
+    title: "Integrating Claude API into a Real Product: Lessons from CodePulse AI",
+    description:
+      "How I built CodePulse AI  a GitHub URL → security audit tool powered by Claude. Covers chunking strategies, structured output, streaming, defensive parsing, and LLM cost management.",
+    date: "2026-05-05",
+    readTime: "9 min read",
+    tags: ["AI", "Claude API", "Node.js", "TypeScript", "CodePulse AI"],
+    pillar: "building",
+    featured: true,
+  },
+  {
+    slug: "docker-compose-local-dev-setup",
+    title: "Docker Compose for Production-Like Local Dev: My Exact Setup",
+    description:
+      "The exact Docker Compose setup I use on every new Node.js project. Postgres, Redis, workers, health checks, named volumes, the node_modules trick, and the new compose watch workflow.",
+    date: "2026-05-18",
+    readTime: "8 min read",
+    tags: ["Docker", "DevOps", "Node.js", "Tutorial"],
+    pillar: "tutorial",
+    featured: false,
+  },
+  {
+    slug: "solidity-for-web2-developers",
+    title: "Solidity for Web2 Developers: My First Year Writing Smart Contracts",
+    description:
+      "A TypeScript developer's guide to Solidity. Mental model shifts, gas optimization, the reentrancy vulnerability every developer needs to understand, and Hardhat testing patterns.",
+    date: "2026-06-05",
+    readTime: "12 min read",
+    tags: ["Solidity", "Web3", "Blockchain", "Ethereum", "Smart Contracts"],
+    pillar: "technical",
+    featured: false,
+  },
 ];
 
 export function getFeaturedPosts(): BlogPost[] {
